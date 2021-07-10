@@ -1,11 +1,17 @@
-package com.example.test;
+package com.example.test.entities;
 
-public class RawDataPointValue {
-    private RawData rawData;
+/**
+ * RawDataPointValue
+ * 
+ * Helps define the value of a csv record against a field
+ * 
+ */
+public class Value {
+    private IField field;
     private String value;
     private String valueForUse;
-    public RawDataPointValue( RawData rawData, String value ) {
-        this.rawData = rawData;
+    public Value( IField rawData, String value ) {
+        this.field = rawData;
         this.valueForUse = String.valueOf(value);
         // implement formatter and coverter for storage
         if (rawData.getFormat().equalsIgnoreCase("time-secs")) {
@@ -15,12 +21,12 @@ public class RawDataPointValue {
         }
         this.value = String.valueOf(value);
     }
-    public RawData getRawData() {
+    public IField getField() {
         // implement formatter and converted for usage
-        return this.rawData;
+        return this.field;
     }
-    public void setRawData(RawData rawData) {
-        this.rawData = rawData;
+    public void setField(IField rawData) {
+        this.field = rawData;
     }
     public String getValue() {
         return this.value;
@@ -34,6 +40,6 @@ public class RawDataPointValue {
     public String toString()
     {
         return valueForUse + " is the "
-            + rawData.getName();
+            + field.getName();
     }
 }

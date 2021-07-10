@@ -1,6 +1,8 @@
-package com.example.test;
+package com.example.test.entities;
 
 import java.util.List;
+
+import com.example.test.constants.Constants;
 import com.google.gson.Gson;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,12 +11,18 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public interface RawData {
+/**
+ * RawData
+ * 
+ * Helps define a field
+ * 
+ */
+public interface IField {
     public abstract Integer getIndex();
     public abstract String getName();
     public abstract String getDescription();
     public abstract String getFormat();
-    public static RawData gRawData(String jsonData){
+    public static IField gRawData(String jsonData){
         // Creating a Gson Object
         Gson gson = new Gson();
   
@@ -22,10 +30,10 @@ public interface RawData {
         // first parameter should be prpreocessed json
         // and second should be mapping class
         return gson.fromJson(jsonData,
-                            RawDataPoint.class);
+                            Field.class);
     }
-    public static List<RawData> gList() {
-        List<RawData> rawDataList = new ArrayList<>(10);
+    public static List<IField> gList() {
+        List<IField> rawDataList = new ArrayList<>(10);
         JSONParser parser = new JSONParser();
             try {
                 Object obj = parser.parse(new FileReader(Constants.csvFormatFile));
@@ -44,7 +52,7 @@ public interface RawData {
                 while (iterator.hasNext()) {
                     JSONObject jsonData = iterator.next();
                     //System.out.println(jsonData);
-                    RawData rawData = gRawData(String.valueOf(jsonData));
+                    IField rawData = gRawData(String.valueOf(jsonData));
                     rawDataList.add(rawData);
                     //System.out.println(rawData);
                 }
@@ -52,8 +60,5 @@ public interface RawData {
                 e.printStackTrace();
             }
         return rawDataList;
-    }
-    public static RawData g(List<RawData> rawDatas, int index) {
-        return rawDatas.get(index);
     }
 }

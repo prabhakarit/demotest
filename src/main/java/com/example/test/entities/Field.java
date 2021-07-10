@@ -1,6 +1,13 @@
-package com.example.test;
+package com.example.test.entities;
 
-public class RawDataPoint implements RawData {
+import java.util.Objects;
+
+/**
+ * RawDataPoint
+ * 
+ * Defines a field of CSV
+ */
+public class Field implements IField {
     private String name;
     private String description;
     private String format;
@@ -50,5 +57,28 @@ public class RawDataPoint implements RawData {
             + description
             + ", Format="
             + format + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        return 32 * this.index.hashCode() * this.name.hashCode() * this.format.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // self check
+    if (this == o)
+    return true;
+    // null check
+    if (o == null)
+        return false;
+    // type check and cast
+    if (getClass() != o.getClass())
+        return false;
+    Field record = (Field) o;
+    // field comparison
+    return Objects.equals(this.name, record.getName())
+            && Objects.equals(this.format, record.getFormat()) 
+            && Objects.equals(this.index, record.getIndex());
     }
 }

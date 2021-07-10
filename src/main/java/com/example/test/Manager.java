@@ -7,19 +7,30 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import com.example.test.constants.Constants;
+import com.example.test.entities.DataFile;
+import com.example.test.entities.IField;
+import com.example.test.entities.Value;
+import com.example.test.entities.Record;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
+/**
+ * Manager
+ * 
+ * Helps manage the calls for generation of the report 
+ * 
+ */
 public enum Manager {
     instance;
 
-    private static List<RawData> rawDataList;
+    private static List<IField> rawDataList;
     private static Map<String, Set<String>> mapContractIdToCustId = new HashMap<>();
     private static Map<String, Set<String>> mapGeozoneToCustId = new HashMap<>(); 
     private static Map<String, List<Integer>> mapGeozoneToBuildTime = new HashMap<>();
     
     public void run() {
-		rawDataList = RawData.gList();
+		rawDataList = IField.gList();
         readAllDataAtOnce(Constants.csvDataFile);
         report();
     }
@@ -64,6 +75,8 @@ public enum Manager {
                                     .build();
             List<String[]> allData = csvReader.readAll();
 
+            DataFile datafile = new DataFile();
+
             // print Data
             for (String[] row : allData) {
                 int index = 0;
@@ -71,9 +84,11 @@ public enum Manager {
                 String customerId = null;
                 String contractId = null;
                 Integer duration = null;
+                Record record = new Record();
                 for (String cell : row) {
                     //System.out.print(cell + "\t");
-                    RawDataPointValue rawDataPointValue = new RawDataPointValue(rawDataList.get(index), cell);
+                    Value rawDataPointValue = new Value(rawDataList.get(index), cell);
+                    record.add(rawDataList.get(index), rawDataPointValue);
                     switch(rawDataList.get(index).getIndex()){
                         case 0:
                             customerId = rawDataPointValue.getValue();
@@ -90,9 +105,10 @@ public enum Manager {
                         default:
                             break;
                     }
-                    System.out.println(rawDataPointValue);
+                    //System.out.println(rawDataPointValue);
                     index = index + 1;
                 }
+                datafile.add(record);
                 // collate customer ids by contractId
                 Set<String> custIdsByContractId = null;
                 if (mapContractIdToCustId.get(contractId) == null) {
@@ -120,8 +136,8 @@ public enum Manager {
                 }
                 buildDurationsByGeozone.add(duration);
                 mapGeozoneToBuildTime.put(geozone, buildDurationsByGeozone);
-                System.out.println();
             }
+            System.out.println(datafile);
         }
         catch (Exception e) {
             e.printStackTrace();
