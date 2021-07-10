@@ -1,0 +1,40 @@
+{
+    "dataTypes" : [
+        {
+            "index" : 0,
+            "name" : "customerId",
+            "description" : "",
+            "format" : "int"
+        },
+        {
+            "index" : 1,
+            "name" : "contractId",
+            "description" : "",
+            "format" : "int"
+        },
+        {
+            "index" : 2,
+            "name" : "geozone",
+            "description" : "",
+            "format" : "string"
+        },
+        {
+            "index" : 3,
+            "name" : "teamcode",
+            "description" : "",
+            "format" : "string"
+        },
+        {
+            "index" : 4,
+            "name" : "projectcode",
+            "description" : "",
+            "format" : "string"
+        },
+        {
+            "index" : 5,
+            "name" : "buildduration",
+            "description" : "",
+            "format" : "time-secs"
+        }
+    ] 
+}
