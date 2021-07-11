@@ -5,7 +5,7 @@
 </BR>
 <ul>
 <li>Update samples under /resources/testdata/sample1...</li>
-<li>Under a sample folder will required 1) csv format definition json and 2) csv data file</li>
+<li>Under any sample folder need to have 2 files, 1) csv format definition json and 2) csv data file</li>
 <li>To Add new sample folders. <br/>Update sample folder name in <a href="https://github.com/prabhakarit/demotest/blob/master/src/main/java/com/Application.java">Application</a>  <li>
 </ul>
 
