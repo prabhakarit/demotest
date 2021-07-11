@@ -15,4 +15,9 @@ class ApplicationIntegrationTests {
 	void testAppRun() throws Exception {
 		Application.main(new String[]{});
 	}
+
+    @Test
+	void testWithDifferentSamples() throws Exception {
+		Application.main(new String[]{});
+	}
 }
