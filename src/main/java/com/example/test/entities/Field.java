@@ -2,11 +2,14 @@ package com.example.test.entities;
 
 import java.util.Objects;
 
+import lombok.Data;
+
 /**
  * RawDataPoint
  * 
  * Defines a field of CSV
  */
+@Data
 public class Field implements IField {
     private String name;
     private String description;
