@@ -2,10 +2,13 @@
 
 </BR>
 <b>Please note</b>
-Update samples under /resources/testdata/sample1...
-Can add new sample folders and update sample folder name in https://github.com/prabhakarit/demotest/blob/master/src/main/java/com/Application.java
+</BR>
+<ul>
+<li>Update samples under /resources/testdata/sample1...</li>
+<li>To Add new sample folders. <br/>Update sample folder name in <a href="https://github.com/prabhakarit/demotest/blob/master/src/main/java/com/Application.java">Application</a>  <li>
+</ul>
 
-</BR></BR></hr></BR></BR>
+</BR></BR>
 
 <b>Please find the coding exercise below :</b>
 </BR>
@@ -24,34 +27,32 @@ Input : 
 3244132,2346,eu_west,YellowTeam3,ProjectEgg,4122s
 </BR>
 </BR>
-</BR>
-</BR>
-Structure : 
-The data is organized into columns delimited by a comma(,) in the following order:
-customerId,contractId,geozone,teamcode,projectcode,buildduration
-Interpretation :
-The first line of data would then be interpreted as
-  2343225 is the customerId
-  2345 is the contractId
-  us_east is the geozone
-  RedTeam is the teamcode
-  ProjectApple is the projectcode
-  3445s is the buildduration
-Outcome :
-Using one of the following programming languages - JAVA/JAVA8, write code that takes the entire multiline string and produces a report containing the following:
-  The number of unique customerId for each contractId.
-  The number of unique customerId for each geozone.
-  The average buildduration for each geozone.
-  The list of unique customerId for each geozone."
- 
-Please consider the following guidelines in your code
-1.       Create a properly structured code for ex. eclipse or IntelliJ based
-2.       Proper Naming of the classes
-3.       Documenting what is the purpose of the classes
-4.       Clean code.
-5.       Design Patterns.
-6.       Design Principles.
-7.       Test Cases(TDD) : Test Cases
-8.       Commit the code in Github.com
-I request you to solve the problem submit the code via github.
-Let’s keep the ETA as .14th July.
+Structure : </BR>
+The data is organized into columns delimited by a comma(,) in the following order:</BR>
+customerId,contractId,geozone,teamcode,projectcode,buildduration</BR>
+Interpretation :</BR>
+The first line of data would then be interpreted as</BR>
+  2343225 is the customerId</BR>
+  2345 is the contractId</BR>
+  us_east is the geozone</BR>
+  RedTeam is the teamcode</BR>
+  ProjectApple is the projectcode</BR>
+  3445s is the buildduration</BR>
+Outcome :</BR>
+Using one of the following programming languages - JAVA/JAVA8, write code that takes </BR>the entire multiline string and produces a report containing the following:</BR>
+  The number of unique customerId for each contractId.</BR>
+  The number of unique customerId for each geozone.</BR>
+  The average buildduration for each geozone.</BR>
+  The list of unique customerId for each geozone."</BR>
+ </BR></BR>
+Please consider the following guidelines in your code</BR>
+1.       &emsp;Create a properly structured code for ex. eclipse or IntelliJ based</BR>
+2.       &emsp;Proper Naming of the classes</BR>
+3.       &emsp;Documenting what is the purpose of the classes</BR>
+4.       &emsp;Clean code.</BR>
+5.       &emsp;Design Patterns.</BR>
+6.       &emsp;Design Principles.</BR>
+7.       &emsp;Test Cases(TDD) : Test Cases</BR>
+8.       &emsp;Commit the code in Github.com</BR>
+I request you to solve the problem submit the code via github.</BR>
+Let’s keep the ETA as .14th July.</BR>
