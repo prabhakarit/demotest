@@ -1,12 +1,31 @@
 # demotest
-Please find the coding exercise below :
+
+</BR>
+<b>Please note</b>
+Update samples under /resources/testdata/sample1...
+Can add new sample folders and update sample folder name in https://github.com/prabhakarit/demotest/blob/master/src/main/java/com/Application.java
+
+</BR></BR></hr></BR></BR>
+
+<b>Please find the coding exercise below :</b>
+</BR>
 Input : 
+</BR>
 "Given a string with the following data (it includes multiple lines):
+</BR>
 2343225,2345,us_east,RedTeam,ProjectApple,3445s
+</BR>
 1223456,2345,us_west,BlueTeam,ProjectBanana,2211s
+</BR>
 3244332,2346,eu_west,YellowTeam3,ProjectCarrot,4322s
+</BR>
 1233456,2345,us_west,BlueTeam,ProjectDate,2221s
+</BR>
 3244132,2346,eu_west,YellowTeam3,ProjectEgg,4122s
+</BR>
+</BR>
+</BR>
+</BR>
 Structure : 
 The data is organized into columns delimited by a comma(,) in the following order:
 customerId,contractId,geozone,teamcode,projectcode,buildduration
