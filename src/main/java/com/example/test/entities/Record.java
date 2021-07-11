@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * RawDataRecord
+ * Record
  * 
  * Will help define a data record by handling mapping for value to respective field
  */

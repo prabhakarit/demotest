@@ -1,7 +1,7 @@
 package com.example.test.entities;
 
 /**
- * RawDataPointValue
+ * Value
  * 
  * Helps define the value of a csv record against a field
  * 

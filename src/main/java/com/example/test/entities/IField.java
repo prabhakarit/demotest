@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * RawData
+ * IField
  * 
  * Helps define a field
  * 

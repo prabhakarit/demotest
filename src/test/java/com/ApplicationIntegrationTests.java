@@ -1,4 +1,8 @@
 package com;
+import com.example.test.Manager;
+import com.example.test.context.Context;
+import com.example.test.context.Data;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,6 +22,17 @@ class ApplicationIntegrationTests {
 
     @Test
 	void testWithDifferentSamples() throws Exception {
-		Application.main(new String[]{});
+        // Running for sample2
+		Context context = new Context();
+        Data datafiles = new Data("sample2");
+        context.setCsvFormatFile(datafiles.getFormatFilePath());
+        context.setCsvDataFile(datafiles.getDataFilePath());
+        Manager.instance.run(context);
+        context = new Context();
+        // Running for sample1
+        datafiles = new Data("sample1");
+        context.setCsvFormatFile(datafiles.getFormatFilePath());
+        context.setCsvDataFile(datafiles.getDataFilePath());
+        Manager.instance.run(context);
 	}
 }
