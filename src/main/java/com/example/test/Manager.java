@@ -2,12 +2,13 @@ package com.example.test;
 
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import com.example.test.constants.Constants;
+import com.example.test.context.Context;
 import com.example.test.entities.DataFile;
 import com.example.test.entities.IField;
 import com.example.test.entities.Value;
@@ -23,30 +24,25 @@ import com.opencsv.CSVReaderBuilder;
  */
 public enum Manager {
     instance;
-
-    private static List<IField> rawDataList;
-    private static Map<String, Set<String>> mapContractIdToCustId = new HashMap<>();
-    private static Map<String, Set<String>> mapGeozoneToCustId = new HashMap<>(); 
-    private static Map<String, List<Integer>> mapGeozoneToBuildTime = new HashMap<>();
     
-    public void run() {
-		rawDataList = IField.gList();
-        readAllDataAtOnce(Constants.csvDataFile);
-        report();
+    public void run(Context context) {
+        context.setRawDataList(IField.gList(context));
+        readAllDataAtOnce(context);
+        report(context);
     }
 
-    public void report() {
+    public void report(Context context) {
         System.out.println("====== Report ======");
         System.out.println("Number of unique customerId for each contractId");
-        for (Map.Entry<String, Set<String>> entry : mapContractIdToCustId.entrySet()) {
+        for (Map.Entry<String, Set<String>> entry : context.getMapContractIdToCustId().entrySet()) {
             System.out.println("For contractId = " + entry.getKey() + ", No. of unique customerIds = " + entry.getValue().size());
         }
         System.out.println("Number of unique customerId for each geozone");
-        for (Map.Entry<String, Set<String>> entry : mapGeozoneToCustId.entrySet()) {
+        for (Map.Entry<String, Set<String>> entry : context.getMapGeozoneToCustId().entrySet()) {
             System.out.println("For geozone = " + entry.getKey() + ", No. of unique customerIds = " + entry.getValue().size());
         }
         System.out.println("Average build duration for each geozone");
-        for (Map.Entry<String, List<Integer>> entry : mapGeozoneToBuildTime.entrySet()) {
+        for (Map.Entry<String, List<Integer>> entry : context.getMapGeozoneToBuildTime().entrySet()) {
             int totalbuildDurationCount = entry.getValue().size();
             int sumOfBuildDurations = 0;
             for (int buildDuration : entry.getValue()) {
@@ -55,19 +51,18 @@ public enum Manager {
             System.out.println("For geozone = " + entry.getKey() + ", average build duration = " + (sumOfBuildDurations/totalbuildDurationCount));
         }
         System.out.println("List of unique customerId for each geozone");
-        for (Map.Entry<String, Set<String>> entry : mapGeozoneToCustId.entrySet()) {
+        for (Map.Entry<String, Set<String>> entry : context.getMapGeozoneToCustId().entrySet()) {
             System.out.println("For geozone = " + entry.getKey() + ", list of unique customerIds = " + entry.getValue());
         }
     }
 
-    public void readAllDataAtOnce(String file)
+    public void readAllDataAtOnce(Context context)
     {
         try {
-
             // Create an object of filereader class
             // with CSV file as a parameter.
-            FileReader filereader = new FileReader(file);
-
+            //FileReader filereader = new FileReader(context.getCsvDataFile());
+            FileReader filereader = Constants.getFileReader(context.getCsvDataFile());
             // create csvReader object
             // and skip first Line
             CSVReader csvReader = new CSVReaderBuilder(filereader)
@@ -87,9 +82,9 @@ public enum Manager {
                 Record record = new Record();
                 for (String cell : row) {
                     //System.out.print(cell + "\t");
-                    Value rawDataPointValue = new Value(rawDataList.get(index), cell);
-                    record.add(rawDataList.get(index), rawDataPointValue);
-                    switch(rawDataList.get(index).getIndex()){
+                    Value rawDataPointValue = new Value(context.getRawDataList().get(index), cell);
+                    record.add(context.getRawDataList().get(index), rawDataPointValue);
+                    switch(context.getRawDataList().get(index).getIndex()){
                         case 0:
                             customerId = rawDataPointValue.getValue();
                             break;
@@ -111,31 +106,31 @@ public enum Manager {
                 datafile.add(record);
                 // collate customer ids by contractId
                 Set<String> custIdsByContractId = null;
-                if (mapContractIdToCustId.get(contractId) == null) {
+                if (context.getMapContractIdToCustId().get(contractId) == null) {
                     custIdsByContractId = new HashSet<>();
                 } else {
-                    custIdsByContractId = mapContractIdToCustId.get(contractId);
+                    custIdsByContractId = context.getMapContractIdToCustId().get(contractId);
                 }
                 custIdsByContractId.add(customerId);
-                mapContractIdToCustId.put(contractId, custIdsByContractId);
+                context.getMapContractIdToCustId().put(contractId, custIdsByContractId);
                 // collate customer ids by geozone
                 Set<String> custIdsByGeozone = null;
-                if (mapGeozoneToCustId.get(geozone) == null) {
+                if (context.getMapGeozoneToCustId().get(geozone) == null) {
                     custIdsByGeozone = new HashSet<>();
                 } else {
-                    custIdsByGeozone = mapGeozoneToCustId.get(geozone);
+                    custIdsByGeozone = context.getMapGeozoneToCustId().get(geozone);
                 }
                 custIdsByGeozone.add(customerId);
-                mapGeozoneToCustId.put(geozone, custIdsByGeozone);
+                context.getMapGeozoneToCustId().put(geozone, custIdsByGeozone);
                 // collate durations by geozone
                 List<Integer> buildDurationsByGeozone = null;
-                if (mapGeozoneToBuildTime.get(geozone) == null) {
+                if (context.getMapGeozoneToBuildTime().get(geozone) == null) {
                     buildDurationsByGeozone = new ArrayList<>();
                 } else {
-                    buildDurationsByGeozone = mapGeozoneToBuildTime.get(geozone);
+                    buildDurationsByGeozone = context.getMapGeozoneToBuildTime().get(geozone);
                 }
                 buildDurationsByGeozone.add(duration);
-                mapGeozoneToBuildTime.put(geozone, buildDurationsByGeozone);
+                context.getMapGeozoneToBuildTime().put(geozone, buildDurationsByGeozone);
             }
             System.out.println(datafile);
         }

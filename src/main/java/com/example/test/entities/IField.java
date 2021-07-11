@@ -3,6 +3,7 @@ package com.example.test.entities;
 import java.util.List;
 
 import com.example.test.constants.Constants;
+import com.example.test.context.Context;
 import com.google.gson.Gson;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -32,11 +33,11 @@ public interface IField {
         return gson.fromJson(jsonData,
                             Field.class);
     }
-    public static List<IField> gList() {
+    public static List<IField> gList(Context context) {
         List<IField> rawDataList = new ArrayList<>(10);
         JSONParser parser = new JSONParser();
             try {
-                Object obj = parser.parse(new FileReader(Constants.csvFormatFile));
+                Object obj = parser.parse(Constants.getFileReader(context.getCsvFormatFile()));
     
                 // A JSON object. Key value pairs are unordered. JSONObject supports java.util.Map interface.
                 JSONObject jsonObject = (JSONObject) obj;

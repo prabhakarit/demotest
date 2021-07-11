@@ -15,5 +15,4 @@ class ApplicationIntegrationTests {
 	void testAppRun() throws Exception {
 		Application.main(new String[]{});
 	}
-
 }
