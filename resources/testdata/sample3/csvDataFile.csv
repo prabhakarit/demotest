@@ -1,0 +1,7 @@
+customerId,contractId,teamcode,projectcode,buildduration,geozone
+2343225,2345,RedTeam,ProjectApple,3445s,us_east
+1223456,2345,BlueTeam,ProjectBanana,2211s,us_west
+3244332,2346,YellowTeam3,ProjectCarrot,4322s,eu_west
+1233456,2345,BlueTeam,ProjectDate,2221s,us_west
+3244132,2346,YellowTeam3,ProjectEgg,4122s,eu_west
+3244131,2348,YellowTeam3,ProjectEgg,4222s,eu_west
