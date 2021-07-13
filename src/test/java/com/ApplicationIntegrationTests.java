@@ -1,5 +1,6 @@
 package com;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import com.example.test.context.Context;
 import com.example.test.context.Data;
 import com.example.test.entities.IField;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -84,5 +86,71 @@ class ApplicationIntegrationTests {
         assertEquals("projectcode", listOfFieldDefinitions.get(3).getName());
         assertEquals("buildduration", listOfFieldDefinitions.get(4).getName());
         assertEquals("geozone", listOfFieldDefinitions.get(5).getName());
+	}
+
+    @Test
+	void testDataLoaderSample1() throws Exception {
+        // Running for sample1
+		Context context = new Context();
+        Data datafiles = new Data("sample1");
+        context.setCsvFormatFile(datafiles.getFormatFilePath());
+        context.setCsvDataFile(datafiles.getDataFilePath());
+        IField.gList(context);
+        Manager.instance.readAllDataAtOnce(context);
+        // contractId to customers
+        assertEquals(1, context.getMapContractIdToCustId().get("2348").size());
+        assertTrue(context.getMapContractIdToCustId().get("2348").contains("3244131"));
+        assertEquals(2, context.getMapContractIdToCustId().get("2346").size());
+        assertTrue(context.getMapContractIdToCustId().get("2346").contains("3244332"));
+        assertTrue(context.getMapContractIdToCustId().get("2346").contains("3244132"));
+        // geozones to customers
+        assertEquals(3, context.getMapGeozoneToCustId().get("eu_west").size());
+        assertTrue(context.getMapGeozoneToCustId().get("eu_west").contains("3244132"));
+        assertTrue(context.getMapGeozoneToCustId().get("eu_west").contains("3244131"));
+        assertTrue(context.getMapGeozoneToCustId().get("eu_west").contains("3244131"));
+        assertEquals(2, context.getMapGeozoneToCustId().get("us_west").size());
+        assertTrue(context.getMapGeozoneToCustId().get("us_west").contains("1233456"));
+        assertTrue(context.getMapGeozoneToCustId().get("us_west").contains("1223456"));
+        // geozones to average build duration
+        assertEquals(3, context.getMapGeozoneToBuildTime().get("eu_west").size());
+        assertTrue(context.getMapGeozoneToBuildTime().get("eu_west").contains(4322));
+        assertTrue(context.getMapGeozoneToBuildTime().get("eu_west").contains(4122));
+        assertTrue(context.getMapGeozoneToBuildTime().get("eu_west").contains(4222));
+        assertEquals(2, context.getMapGeozoneToBuildTime().get("us_west").size());
+        assertTrue(context.getMapGeozoneToBuildTime().get("us_west").contains(2211));
+        assertTrue(context.getMapGeozoneToBuildTime().get("us_west").contains(2221));
+	}
+
+    @Test
+	void testDataLoaderSample2() throws Exception {
+        // Running for sample1
+		Context context = new Context();
+        Data datafiles = new Data("sample2");
+        context.setCsvFormatFile(datafiles.getFormatFilePath());
+        context.setCsvDataFile(datafiles.getDataFilePath());
+        IField.gList(context);
+        Manager.instance.readAllDataAtOnce(context);
+        // contractId to customers
+        assertEquals(1, context.getMapContractIdToCustId().get("2348").size());
+        assertTrue(context.getMapContractIdToCustId().get("2348").contains("3244131"));
+        assertEquals(2, context.getMapContractIdToCustId().get("2346").size());
+        assertTrue(context.getMapContractIdToCustId().get("2346").contains("3244332"));
+        assertTrue(context.getMapContractIdToCustId().get("2346").contains("3244132"));
+        // geozones to customers
+        assertEquals(3, context.getMapGeozoneToCustId().get("eu_west").size());
+        assertTrue(context.getMapGeozoneToCustId().get("eu_west").contains("3244132"));
+        assertTrue(context.getMapGeozoneToCustId().get("eu_west").contains("3244131"));
+        assertTrue(context.getMapGeozoneToCustId().get("eu_west").contains("3244131"));
+        assertEquals(2, context.getMapGeozoneToCustId().get("us_west").size());
+        assertTrue(context.getMapGeozoneToCustId().get("us_west").contains("1233456"));
+        assertTrue(context.getMapGeozoneToCustId().get("us_west").contains("1223456"));
+        // geozones to average build duration
+        assertEquals(4, context.getMapGeozoneToBuildTime().get("eu_west").size());
+        assertTrue(context.getMapGeozoneToBuildTime().get("eu_west").contains(4322));
+        assertTrue(context.getMapGeozoneToBuildTime().get("eu_west").contains(4122));
+        assertTrue(context.getMapGeozoneToBuildTime().get("eu_west").contains(4222));
+        assertEquals(3, context.getMapGeozoneToBuildTime().get("us_west").size());
+        assertTrue(context.getMapGeozoneToBuildTime().get("us_west").contains(2211));
+        assertTrue(context.getMapGeozoneToBuildTime().get("us_west").contains(2221));
 	}
 }

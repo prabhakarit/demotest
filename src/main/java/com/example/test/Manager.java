@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import com.example.test.constants.Constants;
 import com.example.test.context.Context;
 import com.example.test.entities.DataFile;
@@ -26,7 +25,7 @@ public enum Manager {
     instance;
     
     public void run(Context context) {
-        context.setRawDataList(IField.gList(context));
+        IField.gList(context);
         readAllDataAtOnce(context);
         report(context);
     }

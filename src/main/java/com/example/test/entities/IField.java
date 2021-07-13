@@ -60,6 +60,7 @@ public interface IField {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        context.setRawDataList(rawDataList);
         return rawDataList;
     }
 }

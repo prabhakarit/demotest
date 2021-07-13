@@ -3,5 +3,7 @@ customerId,contractId,geozone,teamcode,projectcode,buildduration,optional
 1223456,2345,us_west,BlueTeam,ProjectBanana,2211s,N
 3244332,2346,eu_west,YellowTeam3,ProjectCarrot,4322s,N
 1233456,2345,us_west,BlueTeam,ProjectDate,2221s,Y
+3244332,2346,eu_west,YellowTeam3,ProjectCarrot,4322s,N
+1233456,2345,us_west,BlueTeam,ProjectDate,2221s,Y
 3244132,2346,eu_west,YellowTeam3,ProjectEgg,4122s,N
 3244131,2348,eu_west,YellowTeam3,ProjectEgg,4222s,N
